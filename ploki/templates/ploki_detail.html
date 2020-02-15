@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-9">
+            <div class="container-fluid">
+                <div class="row content">
+                    <div class="col-md-9 offset-md-2">
+                        <div>
+                            <small>
+                                {{ post.created_on.date }} |&nbsp;
+                                Categories:&nbsp;
+                                {% for category in post.categories.all %}
+                                    <a href="{% url 'ploki:ploki_category' category.name %}">
+                                        {{ category.name }}
+                                    </a>&nbsp;
+                                {% endfor %}
+                            </small>
+                            <h2>{{ post.title }}</h2>
+                            <p>{{ post.body | linebreaks }}</p>
+                            <hr>
+                            <h4>Kerro mielipiteesi:</h4>
+                            <div>
+                                <form action="/ploki/{{ post.pk }}/" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        {{ form.author }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.body }}
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Lähetä</button>
+                                </form>
+                            </div>
+                            <h4>Kommentit:</h4>
+                            {% for comment in comments %}
+                                <p>
+                                    On {{comment.created_on.date }}&nbsp;
+                                    <b>{{ comment.author }}</b> kirjoitti:
+                                </p>
+                                <p>{{ comment.body }}</p>
+                                <hr>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

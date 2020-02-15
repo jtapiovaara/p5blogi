@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Blogini: kuten sen näen</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+  </style>
+</head>
+
+
+<nav class="col-sm-2 sidenav">
+    <div class="container">
+        <a class="sidenav-brand" href="{% url 'ploki:ploki_index' %}">
+            <h3>My Story as I see it</h3>
+        </a>
+        <button  class="sidenav-toggle" type="button" data-toggle="collapse" data-target="#sidenavSupportedContent" aria-controls="sidenavSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="sidenav-brand">Arkisto</a>
+            <span class="sidenav-toggle-icon"></span>
+        </button>
+
+        <div class="collapse sidenav-collapse" id="sidenavSupportedContent">
+            <ul>
+            <li class="nav-item active"><a class="nav-link" href="#section1">Tammikuu 2020</a></li>
+            <li class="nav-item active"><a class="nav-link" href="#section2">Joulukuu 2019</a></li>
+            <li class="nav-item active"><a class="nav-link" href="#section3">Marraskuu 2019</a></li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <div class="input-group  form-control">
+        <form method = "GET" action='search'>
+          <input type = "text" placeholder = 'Etsi...'>
+              <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+        </form>
+    </div>
+</nav>
+<body>
+{% block page_content %}
+{% endblock %}
+<footer class="container-fluid text-center">
+  <p>Open source, please feel free to use.  JTapiovaara 2020.</p>
+</footer>
+
+</body>
+</html>
