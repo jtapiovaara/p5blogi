@@ -13,8 +13,8 @@ class CommentForm(forms.Form):
 
     body = forms.CharField(
         widget=forms.Textarea(
-        attrs={
-            "class": "form-control",
-            "placeholder": "Olen iloinen kommenteista!"
-        })
+            attrs={
+                "class": "form-control",
+                "placeholder": "Olen iloinen kommenteista!"
+            })
     )

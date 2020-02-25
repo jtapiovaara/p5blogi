@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% block page_content %}
+    <nav class="col-sm-3 sidenav">
+    </nav>
+
 
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-9">
             <div class="container-fluid">
                 <div class="row content">
-                    <div class="col-md-9 offset-md-2">
+                    <div class="col-md-8 offset-md-2">
                         <div>
                             <small>
                                 {{ post.created_on.date }} |&nbsp;
@@ -18,7 +21,7 @@
                                 {% endfor %}
                             </small>
                             <h2>{{ post.title }}</h2>
-                            <p>{{ post.body | linebreaks }}</p>
+                            <p>{{ post.body | linebreaksbr }}</p>
                             <hr>
                             <h4>Kerro mielipiteesi:</h4>
                             <div>
