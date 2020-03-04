@@ -34,47 +34,18 @@
     }
   </style>
 </head>
-
-{#<nav class="col-sm-2 sidenav">#}
-{#    <div class="container">#}
-{#        <a class="sidenav-brand" href="{% url 'ploki:ploki_index' %}">#}
-{#            <h3>My Story as I see it</h3>#}
-{#        </a>#}
-{#        <button  class="sidenav-toggle" type="button" data-toggle="collapse" data-target="#sidenavSupportedContent" aria-controls="sidenavSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
-{#            <a class="sidenav-brand">Arkisto</a>#}
-{#            <span class="sidenav-toggle-icon"></span>#}
-{#        </button>#}
-{##}
-{#        <div class="collapse sidenav-collapse" id="sidenavSupportedContent">#}
-{#            <ul>#}
-{#            <li class="nav-item active"><a class="nav-link" href="#section1">Tammikuu 2020</a></li>#}
-{#            <li class="nav-item active"><a class="nav-link" href="#section2">Joulukuu 2019</a></li>#}
-{#            <li class="nav-item active"><a class="nav-link" href="#section3">Marraskuu 2019</a></li>#}
-{#            </ul>#}
-{#        </div>#}
-{#    </div>#}
-{#    <br>#}
-{#    <div class="input-group  form-control">#}
-{#        <form method = "GET" action='search'>#}
-{#          <input type = "text" placeholder = 'Etsi...'>#}
-{#              <button class="btn btn-default" type="submit">#}
-{#                <span class="glyphicon glyphicon-search"></span>#}
-{#              </button>#}
-{#        </form>#}
-{#    </div>#}
-{#</nav>#}
-        {% load bootstrap_themes %}
+{% load bootstrap_themes %}
 {#        bootstrap_styles theme's are: default, united, cosmo, cerulean, cyborg, darkly, flatly, journal, litera,#}
 {#        lumen, lux, materia, minty, pulse, sandstone, simplex, sketchy, slate, solar, spacelab, superhero, yeti #}
 {#{% bootstrap_script use_min=True %}#}
-    {% bootstrap_styles theme='cosmo' type='css' %}
-
-        {% load static %}
-            <div class ="jumbotron">
-                <a href="{% url 'ploki:ploki_index' %}">
-                <img src="{% static "images/osaamiset.gif" %}" class="img-fluid">
-                </a>
-            </div>
+{% bootstrap_styles theme='cosmo' type='css' %}
+{% load static %}
+        <div class ="jumbotron img-fluid">
+            <a href="{% url 'ploki:ploki_index' %}">
+                <img src="{% static "images/osaamiset.gif" %}" class="img-responsive">
+{#            <button type="button" class="btn btn-outline-primary">Home</button>#}
+            </a>
+        </div>
 <body class="container-fluid">
 {% block page_content %}
 {% endblock %}
