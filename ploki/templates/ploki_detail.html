@@ -1,51 +1,68 @@
 {% extends 'base.html' %}
 {% block page_content %}
+
+{% load bootstrap_themes %}
+{#        bootstrap_styles theme's are: default, united, cosmo, cerulean, cyborg, darkly, flatly, journal, litera,#}
+{#        lumen, lux, materia, minty, pulse, sandstone, simplex, sketchy, slate, solar, spacelab, superhero, yeti #}
+{#{% bootstrap_script use_min=True %}#}
+{% bootstrap_styles theme='minty' type='css' %}
+{% load static %}
+    <div class ="container-fluid">
+        <a href="{% url 'ploki:ploki_index' %}">
+            <img src="{% static "images/osaamiset.gif" %}" class="img-responsive">
+{#            <button type="button" class="btn btn-outline-primary">Home</button>#}
+        </a>
+    </div>
+    <hr>
+
     <nav class="col-sm-3 sidenav">
+        <ul>
+            {% for post in posts %}
+{#                <li><a href="{% url 'ploki:ploki_detail' post.pk%}">{{ post.created_on }}: {{ post.title }}</a></li>#}
+                <li><a href="{% url 'ploki:ploki_detail' post.pk%}">{{ post.title }}</a></li>
+            {% endfor %}
+        </ul>
     </nav>
 
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-9">
-            <div class="container-fluid">
-                <div class="row content">
-                    <div class="col-md-8 offset-md-2">
-                        <div>
-                            <small>
-                                {{ post.created_on.date }} |&nbsp;
-                                Categories:&nbsp;
-                                {% for category in post.categories.all %}
-                                    <a href="{% url 'ploki:ploki_category' category.name %}">
-                                        {{ category.name }}
-                                    </a>&nbsp;
-                                {% endfor %}
-                            </small>
-                            <h2>{{ post.title }}</h2>
-                            <p>{{ post.body | linebreaksbr }}</p>
-                            <hr>
-                            <h4>Kerro mielipiteesi:</h4>
-                            <div>
-                                <form action="/ploki/{{ post.pk }}/" method="post">
-                                    {% csrf_token %}
-                                    <div class="form-group">
-                                        {{ form.author }}
-                                    </div>
-                                    <div class="form-group">
-                                        {{ form.body }}
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Lähetä</button>
-                                </form>
+            <div class="col-md-8 offset-md-2">
+                <div>
+                    <small>
+                        {{ post.created_on.date }} |&nbsp;
+                        Categories:&nbsp;
+                        {% for category in post.categories.all %}
+                            <a href="{% url 'ploki:ploki_category' category.name %}">
+                                {{ category.name }}
+                            </a>&nbsp;
+                        {% endfor %}
+                    </small>
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.body | linebreaksbr }}</p>
+                    <hr>
+                    <h4>Kerro mielipiteesi:</h4>
+                    <div>
+                        <form action="/ploki/{{ post.pk }}/" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.author }}
                             </div>
-                            <h4>Kommentit:</h4>
-                            {% for comment in comments %}
-                                <p>
-                                    On {{comment.created_on.date }}&nbsp;
-                                    <b>{{ comment.author }}</b> kirjoitti:
-                                </p>
-                                <p>{{ comment.body }}</p>
-                                <hr>
-                            {% endfor %}
-                        </div>
+                            <div class="form-group">
+                                {{ form.body }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Lähetä</button>
+                        </form>
                     </div>
+                    <h4>Kommentit:</h4>
+                    {% for comment in comments %}
+                        <p>
+                            On {{comment.created_on.date }}&nbsp;
+                            <b>{{ comment.author }}</b> kirjoitti:
+                        </p>
+                        <p>{{ comment.body }}</p>
+                        <hr>
+                    {% endfor %}
                 </div>
             </div>
         </div>

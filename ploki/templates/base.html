@@ -19,7 +19,7 @@
 
     /* Set black background color, white text and some padding */
     footer {
-      background-color: #555;
+      background-color: darkgray;
       color: white;
       padding: 15px;
     }
@@ -34,22 +34,9 @@
     }
   </style>
 </head>
-{% load bootstrap_themes %}
-{#        bootstrap_styles theme's are: default, united, cosmo, cerulean, cyborg, darkly, flatly, journal, litera,#}
-{#        lumen, lux, materia, minty, pulse, sandstone, simplex, sketchy, slate, solar, spacelab, superhero, yeti #}
-{#{% bootstrap_script use_min=True %}#}
-{% bootstrap_styles theme='cosmo' type='css' %}
-{% load static %}
-        <div class ="jumbotron img-fluid">
-            <a href="{% url 'ploki:ploki_index' %}">
-                <img src="{% static "images/osaamiset.gif" %}" class="img-responsive">
-{#            <button type="button" class="btn btn-outline-primary">Home</button>#}
-            </a>
-        </div>
-<body class="container-fluid">
 {% block page_content %}
 {% endblock %}
-<footer class="container-fluid text-center">
+<footer class="container text-center">
   <p>Open source, please feel free to use.  JTapiovaara 2020.</p>
 </footer>
 

@@ -1,6 +1,26 @@
 {% extends 'base.html' %}
 {% block page_content %}
+{% load bootstrap_themes %}
+{#        bootstrap_styles theme's are: default, united, cosmo, cerulean, cyborg, darkly, flatly, journal, litera,#}
+{#        lumen, lux, materia, minty, pulse, sandstone, simplex, sketchy, slate, solar, spacelab, superhero, yeti #}
+{#{% bootstrap_script use_min=True %}#}
+{% bootstrap_styles theme='minty' type='css' %}
+{% load static %}
+    <div class ="container-fluid">
+        <a href="{% url 'ploki:ploki_index' %}">
+            <img src="{% static "images/osaamiset.gif" %}" class="img-responsive">
+{#            <button type="button" class="btn btn-outline-primary">Home</button>#}
+        </a>
+    </div>
+    <hr>
+
     <nav class="col-sm-3 sidenav">
+        <ul>
+            {% for post in posts %}
+{#                <li><a href="{% url 'ploki:ploki_detail' post.pk%}">{{ post.created_on }}: {{ post.title }}</a></li>#}
+                <li><a href="{% url 'ploki:ploki_detail' post.pk%}">{{ post.title }}</a></li>
+            {% endfor %}
+        </ul>
     </nav>
 
     <div class="container-fluid">
