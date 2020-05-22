@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ploki/', include('ploki.urls')),
+    path('', include('ploki.urls')),
+    # url(r'^api-auth/', include('rest_framework.urls'))
 ]

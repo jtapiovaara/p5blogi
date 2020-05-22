@@ -3,51 +3,58 @@
 
 {% load bootstrap_themes %}
 {#        bootstrap_styles theme's are: default, united, cosmo, cerulean, cyborg, darkly, flatly, journal, litera,#}
-{#        lumen, lux, materia, minty, pulse, sandstone, simplex, sketchy, slate, solar, spacelab, superhero, yeti #}
+{#        lumen, simplex, slate, spacelab, superhero, yeti #}
 {#{% bootstrap_script use_min=True %}#}
-{% bootstrap_styles theme='minty' type='css' %}
+{% bootstrap_styles theme='flatly' type='css' %}
 {% load static %}
-    <div class ="container-fluid">
+<div class ="container">
+    <div class="row">
         <a href="{% url 'ploki:ploki_index' %}">
-            <img src="{% static "images/osaamiset.gif" %}" class="img-responsive">
-{#            <button type="button" class="btn btn-outline-primary">Home</button>#}
+            <img src="{% static "images/osaamiset_logot_3.png" %}" class="img-responsive">
         </a>
     </div>
+</div>
     <hr>
-<body class="container-fluid">
-    <nav class="col-sm-3 sidenav">
-        <ul>
-            {% for post in posts %}
-{#                <li><a href="{% url 'ploki:ploki_detail' post.pk%}">{{ post.created_on }}: {{ post.title }}</a></li>#}
+<nav class="col-sm-2 sidenav">
+         <ul>
+        {% for post in posts %}
                 <li><a href="{% url 'ploki:ploki_detail' post.pk%}">{{ post.title }}</a></li>
-            {% endfor %}
+        {% endfor %}
         </ul>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="row content">
-            <div class="col-sm-9">
-                <div class="col-md-8 offset-md-2">
-                    <h1>Matkasta Djangon maailmaan</h1>
-                    <hr>
-                    <div>
-                    {% for post in posts %}
-                    <h2><a href="{% url 'ploki:ploki_detail' post.pk%}">{{ post.title }}</a></h2>
-                    <small>
-                        {{ post.created_on.date }} |&nbsp;
-                        Categories:&nbsp;
-                        {% for category in post.categories.all %}
-                        <a href="{% url 'ploki:ploki_category' category.name %}">
-                            {{ category.name }}
-                        </a>&nbsp;
-                        {% endfor %}
-                    </small>
-                    <p>{{ post.body | slice:":400" }}...</p>
+</nav>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-10">
+            <div class="col-md-8">
+                <h3>
+                    <a href="{% url 'ploki:graph' %}">Matkasta Djangon maailmaan (blogimerkinnät / kuukausi)</a>
+                </h3>
+                <hr>
+                <div>
+                {% for post in posts %}
+                        <h3>
+                        <div class="col-sm-1">
+                            <img src="{% static "images/"%}{{ post.kuvitusta }}" class="img-responsive">
+                        </div>
+                            <div class="col-sm-11">
+                            <a href="{% url 'ploki:ploki_detail' post.pk%}">{{ post.title }}</a>
+                            </div>
+                        </h3>
+                <small>
+                    {{ post.created_on.date }} |&nbsp;
+                    Categories:&nbsp;
+                    {% for category in post.categories.all %}
+                    <a href="{% url 'ploki:ploki_category' category.name %}">
+                        {{ category.name }}
+                    </a>&nbsp;
                     {% endfor %}
-                    </div>
+                </small>
+                <p>{{ post.body | slice:":400" }}...</p>
+                {% endfor %}
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

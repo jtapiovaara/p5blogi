@@ -25,7 +25,7 @@ SECRET_KEY = 'ra_6850zha%=p9+!1lnc^o0869w_jbge383#1rf#)nnkd*pxh&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'bootstrap_themes',
     'django_filters',
     'ploki',
