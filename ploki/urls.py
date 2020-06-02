@@ -1,7 +1,6 @@
 from django.urls import path
 from django.conf.urls import url
 from . import views
-from .views import ArticleMonthArchiveView
 from .views import graph, play_count_by_month
 from .models import Post
 
@@ -15,5 +14,4 @@ urlpatterns = [
     path('<category>/', views.ploki_category, name='ploki_category'),
     url(r'^ploki/api/play_count_by_month', play_count_by_month, name='play_count_by_month'),
     path('api/play_count_by_month/', views.play_count_by_month, name='play_count_by_month'),
-    path('<int:year>/<int:month>/', ArticleMonthArchiveView.as_view(month_format='%m'),name="archive_month_numeric"),
 ]

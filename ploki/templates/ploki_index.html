@@ -7,12 +7,16 @@
 {#{% bootstrap_script use_min=True %}#}
 {% bootstrap_styles theme='flatly' type='css' %}
 {% load static %}
-<div class ="container">
-    <div class="row">
-        <a href="{% url 'ploki:ploki_index' %}">
-            <img src="{% static "images/osaamiset_logot_3.png" %}" class="img-responsive">
-        </a>
+<div class ="container-fluid">
+<div class="row">
+    <div class="col">
+            {% for logo in logos %}
+                <a>
+                <img src="{% static "images/"%}{{logo.kuva}}" style="width: 119px">
+                </a>
+            {% endfor %}
     </div>
+</div>
 </div>
     <hr>
 <nav class="col-sm-2 sidenav">
@@ -27,7 +31,7 @@
         <div class="col-sm-10">
             <div class="col-md-8">
                 <h3>
-                    <a href="{% url 'ploki:graph' %}">Matkasta Djangon maailmaan (blogimerkinnät / kuukausi)</a>
+                    <a href="{% url 'ploki:graph' %}">Käppyrä matkasta Djangon maailmaan (blogimerkinnät / kuukausi), yhteensä {{ total }} kpl.</a>
                 </h3>
                 <hr>
                 <div>
@@ -41,7 +45,7 @@
                             </div>
                         </h3>
                 <small>
-                    {{ post.created_on.date }} |&nbsp;
+                    {{ post.julkaistu_pvm }} |&nbsp;
                     Categories:&nbsp;
                     {% for category in post.categories.all %}
                     <a href="{% url 'ploki:ploki_category' category.name %}">
@@ -56,5 +60,7 @@
         </div>
     </div>
 </div>
+
+
 
 {% endblock %}

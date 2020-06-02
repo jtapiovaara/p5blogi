@@ -6,7 +6,7 @@ from django.http import JsonResponse
 
 
 from .forms import CommentForm
-from ploki.models import Post, Comment, Play
+from ploki.models import Post, Comment, Play, Category
 
 
 def ploki_latest(request):
@@ -47,7 +47,6 @@ def ploki_detail(request, pk):
             )
             comment.save()
     comments = Comment.objects.filter(post=post)
-    # print(post.kuvitusta)
     context = {
         'post': post,
         'comments': comments,
@@ -58,7 +57,11 @@ def ploki_detail(request, pk):
 
 def ploki_index(request):
     posts = Post.objects.all().order_by('-created_on')
+    logos = Category.objects.all()
+    total = posts.count()
     context = {
+        'logos': logos,
+        'total': total,
         'posts': posts,
     }
     return render(request, 'ploki_index.html', context)
@@ -70,7 +73,10 @@ def ploki_category(request, category):
     ).order_by(
         '-created_on'
     )
+    logo = Category.objects.get(name=category)
+    print(logo.kuva)
     context = {
+        'logo': logo,
         'category': category,
         'posts': posts
     }
@@ -93,8 +99,3 @@ def play_count_by_month(request):
     return JsonResponse(list(data), safe=False)
 
 
-class ArticleMonthArchiveView(MonthArchiveView):
-    queryset = Post.objects.all()
-    date_field = "julkaistu_pvm"
-    allow_future = True
-    # print(queryset)

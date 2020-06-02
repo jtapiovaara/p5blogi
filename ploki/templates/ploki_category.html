@@ -9,7 +9,7 @@
     <div class ="container">
         <div class="row">
         <a href="{% url 'ploki:ploki_index' %}">
-            <img src="{% static "images/osaamiset_logot_3.png" %}" class="img-responsive">
+            <img src="{% static "images/"%}{{ logo.kuva }}" style="width: 200px">
 {#            <button type="button" class="btn btn-outline-primary">Home</button>#}
         </a>
     </div>
@@ -31,7 +31,7 @@
                 {% for post in posts %}
                 <h2><a href="{% url 'ploki:ploki_detail' post.pk%}">{{ post.title }}</a></h2>
                 <small>
-                    {{ post.created_on.date }} |&nbsp;
+                    {{ post.julkaistu_pvm }} |&nbsp;
                     Categories:&nbsp;
                     {% for category in post.categories.all %}
                     <a href="{% url 'ploki:ploki_category' category.name %}">

@@ -27,7 +27,7 @@
             <div class="col-md-8">
                 <div>
                     <small>
-                        {{ post.created_on.date }} |&nbsp;
+                        {{ post.julkaistu_pvm }} |&nbsp;
                         Categories:&nbsp;
                         {% for category in post.categories.all %}
                             <a href="{% url 'ploki:ploki_category' category.name %}">
