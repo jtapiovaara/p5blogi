@@ -20,11 +20,12 @@
 </div>
     <hr>
 <nav class="col-sm-2 sidenav">
-         <ul>
+    <b>Huomaa myös tämä: <a href="{% url 'ploki:printruno' %}">! Tulosta eKirjaksi !</a></b>
+     <ul>
         {% for post in posts %}
                 <li><a href="{% url 'ploki:ploki_detail' post.pk%}">{{ post.title }}</a></li>
         {% endfor %}
-        </ul>
+    </ul>
 </nav>
 <div class="container-fluid">
     <div class="row content">

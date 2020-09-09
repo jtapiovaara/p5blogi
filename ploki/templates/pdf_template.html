@@ -1,0 +1,70 @@
+<html>
+<head>
+    {% load static %}
+    <title>Matka Djangoon eKirja</title>
+    <div style="page-break-after: always">
+        <hr>
+        <div>
+            <h1 style="text-align: center">My Journey to Python/Django coding</h1>
+        </div>
+        <br>
+        <div style="text-align: center">
+            <img src="{% static "images/eKirjaBody.png" %}" style="text-align: right">
+            <br>
+            <img src="{% static "images/eKirjaFooter.png" %}" style="text-align: right">
+        </div>
+    <br>
+    <hr>
+    </div>
+<style>
+body {
+    {#background-color: #f7f7f7;#}
+    {#background-color: cornsilk;#}
+    font-family: Roboto, cursive, sans-serif;
+}
+img {
+        width: 75%;
+}
+</style>
+</head>
+<body>
+{% load static %}
+<div>
+  {% for paragraph in paragraphs %}
+      <div style="page-break-after: always">
+          <div style="text-align: right">{{ paragraph.id }}
+          </div>
+          <div style="text-align: center">
+              <img src="{% static "images/" %}{{ paragraph.kuvitusta }}" alt = 'intentionally blank'>
+          </div>
+          <div>
+              <h2>{{ paragraph.title }}</h2>
+              <small>{{ paragraph.julkaistu_pvm }}</small>
+              <p>{{ paragraph.body | linebreaksbr  }}</p>
+              <br>
+              <a href="{{ paragraph.linkki }}">{{ paragraph.linkkinimi }}</a>
+          </div>
+      </div>
+  {% endfor %}
+</div>
+{#<div>#}
+{#<h2>Koodiesimerkkejä:</h2>#}
+{#  {% for paragraph in paragraphs.paragraphs_c %}#}
+{#          <small>{{ paragraph.comment_body | linebreaksbr  }}</small>#}
+{#  {% endfor %}#}
+{#</div>#}
+<div>
+<br>
+    <h2>Blogiluettelo</h2>
+      <ul>
+          {% for paragraph in paragraphs%}
+              <small>
+              <li>
+                  {{ paragraph.id }} - {{ paragraph.title }}
+              </small>
+              </li>
+          {% endfor %}
+      </ul>
+</div>
+</body>
+</html>

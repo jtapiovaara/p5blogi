@@ -20,8 +20,8 @@ class Post(models.Model):
     kuvitusta = models.ImageField(blank=True)
     kuvitusta2 = models.ImageField(blank=True)
     kuvitusta3 = models.ImageField(blank=True)
-    kuvitusta4 = models.ImageField(blank=True)
-    kuvitusta5 = models.ImageField(blank=True)
+    linkki = models.URLField(blank=True)
+    linkkinimi = models.CharField(max_length=128, blank=True)
 
     def __str__(self):
         return self.title
@@ -31,11 +31,14 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    author = models.CharField(max_length=60)
-    maili = models.CharField(max_length=60, blank=True)
-    body = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
+    comment_author = models.CharField(max_length=60)
+    comment_maili = models.CharField(max_length=60, blank=True)
+    comment_body = models.TextField()
+    comment_created_on = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comment_author
 
 
 class Play(models.Model):

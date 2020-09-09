@@ -1,9 +1,13 @@
 from django.shortcuts import render
-from django.views.generic.dates import MonthArchiveView
 from django.db import connections
 from django.db.models import Count
 from django.http import JsonResponse
 
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+
+from weasyprint import HTML
 
 from .forms import CommentForm
 from ploki.models import Post, Comment, Play, Category
@@ -41,12 +45,13 @@ def ploki_detail(request, pk):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = Comment(
-                author=form.cleaned_data["author"],
-                body=form.cleaned_data["body"],
+                comment_author=form.cleaned_data["comment_author"],
+                comment_body=form.cleaned_data["comment_body"],
                 post=post
             )
             comment.save()
     comments = Comment.objects.filter(post=post)
+    # print(comments)
     context = {
         'post': post,
         'comments': comments,
@@ -74,7 +79,7 @@ def ploki_category(request, category):
         '-created_on'
     )
     logo = Category.objects.get(name=category)
-    print(logo.kuva)
+    # print(logo)
     context = {
         'logo': logo,
         'category': category,
@@ -99,3 +104,27 @@ def play_count_by_month(request):
     return JsonResponse(list(data), safe=False)
 
 
+def html_to_pdf_view(request, *args):
+    """ some querys to help: prc = Post.objects.filter(comment__comment_body__isnull=False) hakee kaikki
+    postaukset, joille on kommentti. miten sitten yhdistää Post ja Comment queryt yhdeksi? (ala pr | prc)"""
+    # prc = Comment.objects.filter(comment_body__isnull=False)
+    # pr = Post.objects.filter(*args).order_by('julkaistu_pvm')
+    paragraphs = Post.objects.filter(*args).order_by('julkaistu_pvm')
+    # paragraphs_b = Post.objects.select_related(*args).order_by('julkaistu_pvm')
+    # paragraphs_c = Comment.objects.select_related(*args).order_by('comment_created_on')
+    # paragraphs = {
+    #     'paragraphs_b': paragraphs_b,
+    #     'paragraphs_c': paragraphs_c
+    # }
+    html_string = render_to_string('pdf_template.html', {'paragraphs': paragraphs})
+
+    html = HTML(string=html_string, base_url=request.build_absolute_uri())
+    html.write_pdf(target='/tmp/eKirja.pdf')
+
+    fs = FileSystemStorage('/tmp')
+    with fs.open('eKirja.pdf') as pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="eKirja.pdf"'
+        return response
+
+    return response

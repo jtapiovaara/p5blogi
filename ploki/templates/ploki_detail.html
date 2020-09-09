@@ -41,17 +41,18 @@
 {#                    <img src="{% static "images/"%}{{ post.kuvitusta2 }}" class="img-responsive">#}
 {#                    <img src="{% static "images/"%}{{ post.kuvitusta3 }}" class="img-responsive">#}
                     <hr>
-                    <p>{{ post.body | linebreaksbr }}</p>
+                    <p>{{ post.body | linebreaksbr }}</p><br>
+                    <p><a href="{{ post.linkki }}" target="_blank">{{ post.linkkinimi }}</a></p>
                     <hr>
                     <h4>Kerro mielipiteesi:</h4>
                     <div>
                         <form action="/ploki/{{ post.pk }}/" method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                {{ form.author }}
+                                {{ form.comment_author }}
                             </div>
                             <div class="form-group">
-                                {{ form.body }}
+                                {{ form.comment_body }}
                             </div>
                             <button type="submit" class="btn btn-primary">Lähetä</button>
                         </form>
@@ -59,10 +60,10 @@
                     <h4>Kommentit:</h4>
                     {% for comment in comments %}
                         <p>
-                            On {{comment.created_on.date }}&nbsp;
-                            <b>{{ comment.author }}</b> kirjoitti:
+                            On {{ comment.comment_created_on.date }}&nbsp;
+                            <b>{{ comment.comment_author }}</b> kirjoitti:
                         </p>
-                        <p>{{ comment.body }}</p>
+                        <p>{{ comment.comment_body }}</p>
                         <hr>
                     {% endfor %}
                 </div>
