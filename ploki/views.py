@@ -27,7 +27,6 @@ def ploki_latest(request):
             )
             comment.save()
     comments = Comment.objects.filter(post=post)
-    # print(post.kuvitusta)
     context = {
         'post': post,
         'comments': comments,

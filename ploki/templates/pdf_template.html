@@ -20,7 +20,8 @@
 body {
     {#background-color: #f7f7f7;#}
     {#background-color: cornsilk;#}
-    font-family: Roboto, cursive, sans-serif;
+    {#font-family: Roboto, cursive, sans-serif;#}
+    font-family: Baskerville, serif;
 }
 img {
         width: 75%;
@@ -35,7 +36,7 @@ img {
           <div style="text-align: right">{{ paragraph.id }}
           </div>
           <div style="text-align: center">
-              <img src="{% static "images/" %}{{ paragraph.kuvitusta }}" alt = 'intentionally blank'>
+              <img src="{% static "images/" %}{{ paragraph.kuvitusta }}" style="width: 400px" alt = 'intentionally blank'>
           </div>
           <div>
               <h2>{{ paragraph.title }}</h2>
