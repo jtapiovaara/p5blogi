@@ -78,7 +78,7 @@ def ploki_category(request, category):
         '-created_on'
     )
     logo = Category.objects.get(name=category)
-    # print(logo)
+    print(logo)
     context = {
         'logo': logo,
         'category': category,
